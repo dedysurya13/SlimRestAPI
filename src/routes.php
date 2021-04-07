@@ -14,4 +14,26 @@ return function (App $app) {
         // Render index view
         return $container->get('renderer')->render($response, 'index.phtml', $args);
     });
+
+    $app->get("/kategori", function(Request $request, Response $response){
+        $sql = "SELECT kode_kategori, nama_kategori FROM aset_kategori_aset";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $response->withJson(["status" => "success", "data" => $result], 200);
+    });
+
+    $app->get("/kategori/{kode_kategori}", function(Request $request, Response $response, array $args){
+        $kode_kategori = trim(strip_tag($args['kode_kategori']));
+        $sql = "SELECT kode_kategori, nama_kategori FROM aset_kategori_aset WHERE kode_kategori=:kode_kategori";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam("kode_kategori", $kode_kategori);
+        $stmt->execute();
+        $mainCount = $stmt->rowCount();
+        $result = $stmt->fetchObject();
+        if($mainCount==0){
+            return $this->response->withJson(['status' => 'error', 'message' => 'no result data'], 200);
+        }
+        return $response->withJson(['status' => 'success', 'data' => $result], 200);
+    });
 };
