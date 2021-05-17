@@ -23,6 +23,6 @@ return [
             'pass' => 'admin1',
             'database' => 'asetrsuic',
             'driver' => 'sqlsrv'
-        ]
+        ],
     ],
 ];
