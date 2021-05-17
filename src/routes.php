@@ -7,13 +7,13 @@ use Slim\Http\Response;
 return function (App $app) {
     $container = $app->getContainer();
 
-    $app->get('/[{name}]', function (Request $request, Response $response, array $args) use ($container) {
-        // Sample log message
-        $container->get('logger')->info("Slim-Skeleton '/' route");
+    // $app->get('/[{name}]', function (Request $request, Response $response, array $args) use ($container) {
+    //     // Sample log message
+    //     $container->get('logger')->info("Slim-Skeleton '/' route");
 
-        // Render index view
-        return $container->get('renderer')->render($response, 'index.phtml', $args);
-    });
+    //     // Render index view
+    //     return $container->get('renderer')->render($response, 'index.phtml', $args);
+    // });
 
     $app->get("/kategori", function(Request $request, Response $response){
         $sql = "SELECT kode_kategori, nama_kategori FROM aset_kategori_aset";
