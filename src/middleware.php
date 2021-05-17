@@ -9,7 +9,6 @@ return function (App $app) {
     $app->add(function ($request, $response, $next) {
     
         $key = $request->getQueryParam("key");
-        
     
         if(!isset($key)){
             return $response->withJson(["status" => "API Key required"], 401);
